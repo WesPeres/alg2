@@ -4,7 +4,7 @@ nomePrograma=trab
 all: $(nomePrograma)
 
 $(nomePrograma): main.o ordenacao.o
-	gcc -o $(nomePrograma) main.o ordenacao.o $(parametrosCompilacao)
+	gcc -o $(nomePrograma) main.o ordenacao.o -lm $(parametrosCompilacao)
 
 main.o: main.c
 	gcc -c main.c $(parametrosCompilacao)
