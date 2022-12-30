@@ -7,8 +7,34 @@
 //seu nome pode ter no máximo MAX_CHAR_NOME - 1 caracteres
 void getNome(char nome[]);
 
-//a função a seguir deve retornar o seu número de GRR
+//retorna o número do GRR
 unsigned int getGRR();
+
+void escolheSortAlg(int algCode, int vetor[], int tam);
+
+void escolheSearchAlg(int algCode, int vetor[], int tam);
+
+void writeReversedArray(int v[], int tam);
+
+void writeRandomArray(int vetor[], int tam);
+
+void readArray(int v[], int tam);
+
+void troca(int vetor[], int a, int b);
+
+int minimo(int vetor[], int tam, int *numComparacoes);
+
+int insere(int vetor[], int tam);
+
+void copia_vetor(int v[], int u[], int tam);
+
+int intercala(int vetor[], int tam, int m);
+
+int particiona(int vetor[], int tam, int x, int *numComparacoes);
+
+void maxHeapify(int vetor[], int tam, int index, int *numComparacoes);
+
+void buildMaxHeap(int vetor[], int tam, int *numComparacoes);
 
 //Assuma que os vetores estão ordenados ao chamar as funções de busca
 //As funções de busca não devem alterar o vetor
