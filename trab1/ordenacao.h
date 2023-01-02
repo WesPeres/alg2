@@ -3,53 +3,63 @@
 
 #define MAX_CHAR_NOME 50
 
-//a função getNome deve colocar o seu nome dentro da chamada
-//seu nome pode ter no máximo MAX_CHAR_NOME - 1 caracteres
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+// A função getNome coloca um nome dentro da chamada
 void getNome(char nome[]);
 
-//retorna o número do GRR
+// Retorna o número do GRR
 unsigned int getGRR();
 
+// Escolhe um algoritmo de ordenação através de uma flag
 void escolheSortAlg(int algCode, int vetor[], int tam);
 
+// Escolhe um algoritmo de busca através de uma flag
 void escolheSearchAlg(int algCode, int vetor[], int tam);
 
+// Cria um vetor inverso
 void writeReversedArray(int v[], int tam);
 
+// Cria um vetor aleatorio
 void writeRandomArray(int vetor[], int tam);
 
+// Imprime o vetor
 void readArray(int v[], int tam);
 
+// Troca dois elementos de um vetor passados seus índices
 void troca(int vetor[], int a, int b);
 
+// Encontra o índice do menor elemento do vetor
 int minimo(int vetor[], int tam, int *numComparacoes);
 
+// Insere o último elemento do vetor na posição correta
 int insere(int vetor[], int tam);
 
+// Copia um vetor para outro
 void copia_vetor(int v[], int u[], int tam);
 
+// Ordena um vetor com duas metades ordenadas
 int intercala(int vetor[], int tam, int m);
 
+// Coloca todos os elementos menores ou iguais que o pivô à esquerda
+// e todos os elementos maiores à direita
 int particiona(int vetor[], int tam, int x, int *numComparacoes);
 
+// Ordena um trio de nodos para construir um max heap
 void maxHeapify(int vetor[], int tam, int index, int *numComparacoes);
 
+// Percorre todos os nodos que não são folhas, chamando maxHeapify
 void buildMaxHeap(int vetor[], int tam, int *numComparacoes);
-
-//Assuma que os vetores estão ordenados ao chamar as funções de busca
-//As funções de busca não devem alterar o vetor
-//O retorno das funções de busca é o índice do elemento no vetor,
-//ou -1 caso o elemeno não exista no vetor
-//Você deve armazenar no ponteiro int* numComparacoes o número de comparações
-//envolvendo elementos do vetor feito pelo seu algoritmo na chamada
 
 //a busca sequencial é a busca ingênua
 int buscaSequencial(int vetor[], int tam, int valor, int* numComparacoes);
 
-//busca binária no vetor
+// Busca binaria de elemento no vetor
 int buscaBinaria(int vetor[], int tam, int valor, int* numComparacoes);
 
-//Cada uma das funções deve ordenar o vetor passado como parâmetro
+//Cada uma das funções ordena o vetor passado como parâmetro
 //O retorno das funções de ordenação é o número de comparações
 //entre elementos do vetor
 

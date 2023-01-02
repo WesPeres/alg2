@@ -1,10 +1,7 @@
 #include "ordenacao.h"
 
 #include <string.h>
-#include <stdio.h>
 #include <math.h>
-#include <stdlib.h>
-#include <time.h>
 
 void getNome(char nome[]){
 	strncpy(nome, "Wesley Peres de Freitas", MAX_CHAR_NOME);
@@ -23,7 +20,6 @@ void escolheSearchAlg(int algCode, int vetor[], int tam) {
 	int numComp = 0;
 
 	if (algCode == 1) {
-	
 		printf("\nBusca Sequencial:\n");
 		printf("Digite o valor a ser inserido no vetor: ");
 		scanf("%i", &valor);
@@ -175,22 +171,23 @@ int intercala(int vetor[], int tam, int m) {
 	if (tam <= 1)
 		return 0;
 	
-	int u[tam];
+	int *aux = malloc(tam * sizeof(int));
 	int numComparacoes = 0;
 	int i = 0;
 	int j = m + 1;
 	for (int k = 0; k < tam; k++) {
 		numComparacoes++;
 		if ((j > tam - 1) || ((i <= m) && (vetor[i] <= vetor[j]))) {
-			u[k] = vetor[i];
+			aux[k] = vetor[i];
 			i++;
 		}
 		else {
-			u[k] = vetor[j];
+			aux[k] = vetor[j];
 			j++;
 		}
 	}
-	copia_vetor(vetor, u, tam);
+	copia_vetor(vetor, aux, tam);
+	free(aux);
 	
 	return numComparacoes;
 }

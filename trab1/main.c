@@ -1,7 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include <stdlib.h>
 #include <stdbool.h>
 
 #include "ordenacao.h"
@@ -35,8 +31,8 @@ int main(){
 		return 1;
 	}
 
-	/* eh passado como parametro dos algoritmos de busca e ordenação
-	 * a fim de conservar o vetor original, nao ordenado */
+	/* É passado como parâmetro dos algoritmos de busca e ordenação
+	 * a fim de conservar o vetor original, não ordenado */
 	int *copia = malloc(tamVetor * sizeof(int));
 	if (copia == NULL) {
 		printf("Falha fatal. Impossivel alocar memoria.");
@@ -49,6 +45,7 @@ int main(){
 		scanf("%i", &vetCode);
 	} while (vetCode != 1 && vetCode != 2);
 	
+	// Cria vetor correspondente à escolha
 	if (vetCode == 1)
 		writeReversedArray(vetor, tamVetor);
 	else
@@ -56,6 +53,7 @@ int main(){
 
 	readArray(vetor, tamVetor);
 
+	// Escolhe algoritmo de ordenação
 	ordenado = false;
 	do {
 		printf("\nInsira 1 para Insertion Sort\n");
@@ -63,7 +61,7 @@ int main(){
 		printf("Insira 3 para Merge Sort\n");
 		printf("Insira 4 para Quick Sort\n");
 		printf("Insira 5 para Heap Sort\n");
-		printf("Insira 0 para algoritmos de busca \n");
+		printf("Insira 0 para algoritmos de busca\n\n");
 		scanf("%i", &algCode);
 					
 		if (algCode >= 1 && algCode <= 5) {
@@ -77,6 +75,8 @@ int main(){
 		}
 	} while (algCode != 0 || !ordenado) ;
 
+
+	// Escolhe algoritmo de busca
 	do {
 		printf("\nInsira 1 para Busca Sequencial\n");
 		printf("Insira 2 para Busca Binaria\n");
