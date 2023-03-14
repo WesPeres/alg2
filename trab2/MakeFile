@@ -1,0 +1,14 @@
+# -*- MakeFile -*- 
+
+# target: dependencies
+#	action
+
+all: main
+
+main: main.o
+
+main.o: main.c
+	gcc -o main main.c
+
+clean:
+	rm -f *.o main
