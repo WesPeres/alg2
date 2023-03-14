@@ -20,7 +20,7 @@ int main() {
     int n;
     // Peso máximo suportado pelo saco
     int pmax;
-    // Valor sentimental de cada presente
+    // Valor sentimental e peso de cada presente
     struct presente presentes[n];
     // Lê as entradas
     scanf("%i", &n);
