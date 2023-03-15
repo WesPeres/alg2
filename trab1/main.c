@@ -1,90 +1,113 @@
 #include <stdbool.h>
-
 #include "ordenacao.h"
 
 #define MAX_VETOR 50000
 
 int main(){
 	char nome[MAX_CHAR_NOME];
-	int tamVetor;
-	/* Codigo utilizado para verificar a escolha do vetor inverso
-	 * ou do vetor aleatório */
-	int vetCode;
-	// Codigo utilizado para verificar a escolha do algoritmo
-	int algCode;
-	/* Utilizado para verificar se o vetor foi ordenado antes de
-	 * utilizar algum algoritmo de busca */
-	bool ordenado;
+	int numComp;
+	// Valor a ser pesquisado na busca sequencial ou binária
+	int valor;
+	// Indice da posição do valor buscado
+	int idxBusca;
+
 
 	getNome(nome);
 	printf("Trabalho de %s\n", nome);
 	printf("GRR %u\n", getGRR());
 
-	do {
-		printf("Digite o tamanho do vetor (entre 0 e 50000): ");
-		scanf("%i", &tamVetor);
-	} while (tamVetor < 0 || tamVetor > MAX_VETOR);
-
-	int *vetor = malloc(tamVetor * sizeof(int));
+	int *vetor = malloc(MAX_VETOR * sizeof(int));
 	if (vetor == NULL) {
-		printf("Falha fatal. Impossivel alocar memoria.");
+		printf("Falha fatal. Impossível alocar memoria.");
 		return 1;
 	}
 
 	/* É passado como parâmetro dos algoritmos de busca e ordenação
 	 * a fim de conservar o vetor original, não ordenado */
-	int *copia = malloc(tamVetor * sizeof(int));
+	int *copia = malloc(MAX_VETOR * sizeof(int));
 	if (copia == NULL) {
-		printf("Falha fatal. Impossivel alocar memoria.");
+		printf("Falha fatal. Impossível alocar memoria.");
 		return 1;
 	}
-
-	do {
-		printf("Digite 1 se deseja criar um vetor inverso. Ex: [3, 2, 1]\n");
-		printf("Digite 2 se deseja criar um vetor aleatório. Ex: [2, 5, 1]\n");
-		scanf("%i", &vetCode);
-	} while (vetCode != 1 && vetCode != 2);
 	
-	// Cria vetor correspondente à escolha
-	if (vetCode == 1)
-		writeReversedArray(vetor, tamVetor);
+	/* Também é possível criar um vetor ordenado inversamente
+	* através da função	writeReversedArray(vetor, MAX_VETOR); */
+	// A função abaixo cria um vetor aleatório
+	writeRandomArray(vetor, MAX_VETOR);
+	// Cria cópia do vetor para poder recuperá-lo após ser ordenado
+	copia_vetor(copia, vetor, MAX_VETOR);
+
+	clock_t start, end;
+	double total;
+
+	printf("\nInsertion Sort:\n");
+	start = clock();
+	numComp = insertionSort(copia, MAX_VETOR);
+	end = clock();
+	total = ((double)end - start)/CLOCKS_PER_SEC;
+	printf("Tempo total: %f\n", total);
+	printf("Número de comparações: %i\n", numComp);
+
+	copia_vetor(copia, vetor, MAX_VETOR);
+
+	printf("\nSelection Sort:\n");
+	start = clock();
+	numComp = selectionSort(copia, MAX_VETOR);
+	end = clock();
+	total = ((double)end - start)/CLOCKS_PER_SEC;
+	printf("Tempo total: %f\n", total);
+	printf("Número de comparações: %i\n", numComp);
+
+	copia_vetor(copia, vetor, MAX_VETOR);
+
+	printf("\nMerge Sort:\n");
+	start = clock();
+	numComp = mergeSort(copia, MAX_VETOR);
+	end = clock();
+	total = ((double)end - start)/CLOCKS_PER_SEC;
+	printf("Tempo total: %f\n", total);
+	printf("Número de comparações: %i\n", numComp);
+
+	copia_vetor(copia, vetor, MAX_VETOR);
+
+	printf("\nQuick Sort:\n");
+	start = clock();
+	numComp = quickSort(copia, MAX_VETOR);
+	end = clock();
+	total = ((double)end - start)/CLOCKS_PER_SEC;
+	printf("Tempo total: %f\n", total);
+	printf("Número de comparações: %i\n", numComp);
+
+	copia_vetor(copia, vetor, MAX_VETOR);
+
+	printf("\nHeap Sort:\n");
+	start = clock();
+	numComp = heapSort(copia, MAX_VETOR);
+	end = clock();
+	total = ((double)end - start)/CLOCKS_PER_SEC;
+	printf("Tempo total: %f\n", total);
+	printf("Número de comparações: %i\n\n", numComp);
+
+	readArray(copia, MAX_VETOR);
+
+	numComp = 0;
+	printf("\nBusca Sequencial:\n");
+	printf("Digite o valor a ser inserido no vetor: ");
+	scanf("%i", &valor);
+	idxBusca = buscaSequencial(copia, MAX_VETOR, valor, &numComp);
+	printf("%i deve ser inserido na posicao de indice %i\n", valor, idxBusca);
+	printf("Número de comparações: %i\n", numComp);
+
+	numComp = 0;
+	printf("\nBusca Binária:\n");
+	printf("Digite o valor a ser pesquisado no vetor: ");
+	scanf("%i", &valor);
+	idxBusca = buscaBinaria(copia, MAX_VETOR, valor, &numComp);
+	if (idxBusca == -1)
+		printf("%i não pertence ao vetor\n", valor);
 	else
-		writeRandomArray(vetor, tamVetor);
-
-	readArray(vetor, tamVetor);
-
-	// Escolhe algoritmo de ordenação
-	ordenado = false;
-	do {
-		printf("\nInsira 1 para Insertion Sort\n");
-		printf("Insira 2 para Selection Sort\n");
-		printf("Insira 3 para Merge Sort\n");
-		printf("Insira 4 para Quick Sort\n");
-		printf("Insira 5 para Heap Sort\n");
-		printf("Insira 0 para algoritmos de busca\n\n");
-		scanf("%i", &algCode);
-					
-		if (algCode >= 1 && algCode <= 5) {
-			copia_vetor(copia, vetor, tamVetor);
-			escolheSortAlg(algCode, copia, tamVetor);
-			ordenado = true;
-		}
-		else if (algCode == 0 && !ordenado) {
-			printf("Voce precisa escolher um algoritmo de ordenacao "
-					"antes de utilizar um algoritmo de busca\n\n");
-		}
-	} while (algCode != 0 || !ordenado) ;
-
-
-	// Escolhe algoritmo de busca
-	do {
-		printf("\nInsira 1 para Busca Sequencial\n");
-		printf("Insira 2 para Busca Binaria\n");
-		printf("Insira 0 para sair\n");
-		scanf("%i", &algCode);
-
-		escolheSearchAlg(algCode, copia, tamVetor);
-	} while (algCode != 0);
+		printf("%i está na posição de índice %i\n", valor, idxBusca);
+	printf("Número de comparações: %i\n", numComp);
 
 	free(vetor);
 	free(copia);

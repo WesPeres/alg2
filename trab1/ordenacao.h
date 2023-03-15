@@ -7,17 +7,12 @@
 #include <stdlib.h>
 #include <time.h>
 
+
 // A função getNome coloca um nome dentro da chamada
 void getNome(char nome[]);
 
 // Retorna o número do GRR
 unsigned int getGRR();
-
-// Escolhe um algoritmo de ordenação através de uma flag
-void escolheSortAlg(int algCode, int vetor[], int tam);
-
-// Escolhe um algoritmo de busca através de uma flag
-void escolheSearchAlg(int algCode, int vetor[], int tam);
 
 // Cria um vetor inverso
 void writeReversedArray(int v[], int tam);
@@ -53,10 +48,8 @@ void maxHeapify(int vetor[], int tam, int index, int *numComparacoes);
 // Percorre todos os nodos que não são folhas, chamando maxHeapify
 void buildMaxHeap(int vetor[], int tam, int *numComparacoes);
 
-//a busca sequencial é a busca ingênua
 int buscaSequencial(int vetor[], int tam, int valor, int* numComparacoes);
 
-// Busca binaria de elemento no vetor
 int buscaBinaria(int vetor[], int tam, int valor, int* numComparacoes);
 
 //Cada uma das funções ordena o vetor passado como parâmetro

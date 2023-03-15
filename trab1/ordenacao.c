@@ -12,99 +12,6 @@ unsigned int getGRR(){
 	return 20221235;
 }
 
-void escolheSearchAlg(int algCode, int vetor[], int tam) {
-	clock_t start, end;
-	double total;
-	int valor;
-	int idxBusca;
-	int numComp = 0;
-
-	if (algCode == 1) {
-		printf("\nBusca Sequencial:\n");
-		printf("Digite o valor a ser inserido no vetor: ");
-		scanf("%i", &valor);
-		start = clock();
-		idxBusca = buscaSequencial(vetor, tam, valor, &numComp);
-		end = clock();
-		total = ((double)end - start)/CLOCKS_PER_SEC;
-		printf("Tempo total: %f\n", total);
-		printf("%i deve ser inserido na posicao de indice %i\n", valor, idxBusca);
-		printf("Número de comparações: %i\n", numComp);
-	}
-	else if (algCode == 2) {
-		printf("\nBusca Binária:\n");
-		printf("Digite o valor a ser pesquisado no vetor: ");
-		scanf("%i", &valor);
-		start = clock();
-		idxBusca = buscaBinaria(vetor, tam, valor, &numComp);
-		end = clock();
-		total = ((double)end - start)/CLOCKS_PER_SEC;
-		printf("Tempo total: %f\n", total);
-		if (idxBusca == - 1)
-			printf("%i nao pertence ao vetor\n", valor);
-		else
-			printf("%i está na posição de índice %i\n", valor, idxBusca);
-		printf("Número de comparações: %i\n", numComp);
-	}
-}
-
-void escolheSortAlg(int algCode, int vetor[], int tam) {
-	int numComp;
-	clock_t start, end;//variáveis do tipo clock_t
-	double total;
-
-	if (algCode == 1) {
-		printf("\nInsertion Sort:\n");
-		start = clock();//start recebe o "ciclo" corrente
-		numComp = insertionSort(vetor, tam);
-		end = clock();//end recebe o "ciclo" corrente
-		total = ((double)end - start)/CLOCKS_PER_SEC;
-		readArray(vetor, tam);
-		printf("Tempo total: %f\n", total);
-		printf("Número de comparações: %i\n", numComp);
-	}
-	else if (algCode == 2) {
-		printf("\nSelection Sort:\n");
-		start = clock();
-		numComp = selectionSort(vetor, tam);
-		end = clock();
-		total = ((double)end - start)/CLOCKS_PER_SEC;
-		readArray(vetor, tam);
-		printf("Tempo total: %f\n", total);
-		printf("Número de comparações: %i\n", numComp);
-	}
-	else if(algCode == 3) {
-		printf("\nMerge Sort:\n");
-		start = clock();
-		numComp = mergeSort(vetor, tam);
-		end = clock();
-		total = ((double)end - start)/CLOCKS_PER_SEC;
-		readArray(vetor, tam);
-		printf("Tempo total: %f\n", total);
-		printf("Número de comparações: %i\n", numComp);
-	}
-	else if(algCode == 4) {
-		printf("\nQuick Sort:\n");
-		start = clock();
-		numComp = quickSort(vetor, tam);
-		end = clock();
-		total = ((double)end - start)/CLOCKS_PER_SEC;
-		readArray(vetor, tam);
-		printf("Tempo total: %f\n", total);
-		printf("Número de comparações: %i\n", numComp);
-	}
-	else if (algCode == 5) {
-		printf("\nHeap Sort:\n");
-		start = clock();
-		numComp = heapSort(vetor, tam);
-		end = clock();
-		total = ((double)end - start)/CLOCKS_PER_SEC;
-		readArray(vetor, tam);
-		printf("Tempo total: %f\n", total);
-		printf("Número de comparações: %i\n", numComp);
-	}
-}
-
 void writeReversedArray(int vetor[], int tam) {
     for (int i = 0; i < tam; i++) {
         vetor[i] = tam - i;
@@ -124,7 +31,7 @@ void readArray(int vetor[], int tam) {
 	for (int i = 0; i < tam; i++) {
 		printf("v[%i]=%i | ", i, vetor[i]);
 		cont++;
-		if (cont == 10) {
+		if (cont == 9) {
 			printf("\n ");
 			cont = 0;
 		}
@@ -309,7 +216,7 @@ int heapSort(int vetor[], int tam){
 	int numComparacoes = 0;
 	buildMaxHeap(vetor, tam, &numComparacoes);
 
-	for (int i = tam - 1; i >= 0; i--) {
+	for (int i = tam - 1; i > 0; i--) {
 		troca(vetor, 0, i);
 		tam = tam - 1;
 		maxHeapify(vetor, tam, 0, &numComparacoes);
